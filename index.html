@@ -1580,7 +1580,19 @@ button, a { -webkit-tap-highlight-color: transparent; }
 @media (prefers-reduced-motion: reduce) {
   .work-card img, .about-image img { transition: none; }
 }
-
+/* Contact cards */
+.contact-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin: 3rem 0; text-align: left; }
+.contact-card {
+  display: block; padding: 1.6rem 1.8rem; text-decoration: none; color: var(--ink);
+  background: rgba(255,252,247,.72); border: 1px solid var(--line-warm);
+  transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+}
+.contact-card:hover { transform: translateY(-3px); border-color: rgba(173,132,78,.55); box-shadow: 0 16px 34px rgba(47,33,21,.08); }
+.contact-label { display: block; font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; color: var(--accent-blue); font-weight: 600; margin-bottom: .5rem; }
+.contact-value { display: block; font-size: 1.1rem; font-weight: 500; word-break: break-word; }
+.contact-note { display: block; font-size: .8rem; color: var(--ink-soft); margin-top: .35rem; }
+.footer-links a { word-break: break-word; }
+@media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -1713,7 +1725,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
                         <p>We believe cafés aren't just places to grab coffee — they are community hubs. Traditional social media management fails because it focuses only on generic posts.</p>
                         <p>PPAPERFORTUNE acts as a complete growth partner, connecting high-aesthetic digital content directly with real-world student culture around Presidency University.</p>
                     </div>
-                    <div class="philosophy-signature">Aesthetic Content • Local SEO • Experiential Events</div>
+                    <div class="philosophy-signature">FOUNDER - Aesthetic Content • Local SEO • Experiential Events</div>
                 </div>
             </div>
         </section>
@@ -1723,7 +1735,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
             <div class="container">
                 <div class="section-header reveal">
                     <span class="section-label">Portfolio</span>
-                    <h2 class="section-title">@ppaperfortune</h2>
+                    <h2 class="section-title">@ppaperfortune.studio</h2>
                     <p class="section-subtitle">Visual highlights from our partner cafés</p>
                 </div>
                 <div class="works-grid" style="grid-template-columns: repeat(4, 1fr); gap: 1rem;">
@@ -1762,7 +1774,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
                     <div class="product-details">
                         <h3>Tier 1: Starter Vibe</h3>
                         <p class="product-desc">Essential social media presence & Google SEO setup</p>
-                        <span class="product-price">₹12,000 – ₹15,000 / month</span>
+                        <span class="product-price">₹14,000 – ₹15,000 / month</span>
                     </div>
                 </div>
                 <div class="product-card reveal" onclick="showProduct('growth-reach')">
@@ -1773,7 +1785,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
                     <div class="product-details">
                         <h3>Tier 2: Growth & Reach</h3>
                         <p class="product-desc">12 Reels/mo, Influencer Visit & FREE Digital Menu Web App</p>
-                        <span class="product-price">₹20,000 – ₹25,000 / month</span>
+                        <span class="product-price">₹25,000 – ₹28,000 / month</span>
                     </div>
                 </div>
                 <div class="product-card reveal" onclick="showProduct('full-experiential')">
@@ -1784,7 +1796,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
                     <div class="product-details">
                         <h3>Tier 3: Full Experiential</h3>
                         <p class="product-desc">20 Reels/mo, Weekly Shoots & Live Event Activations</p>
-                        <span class="product-price">₹35,000 – ₹40,000 / month</span>
+                        <span class="product-price">₹39,999 – ₹45,000 / month</span>
                     </div>
                 </div>
                 <div class="product-card reveal" onclick="showProduct('digital-menu')">
@@ -1970,31 +1982,50 @@ button, a { -webkit-tap-highlight-color: transparent; }
 
     <!-- CONTACT PAGE -->
     <div class="page" id="page-contact">
-        <div class="about-hero" style="height: 50vh;">
-            <div class="about-hero-content">
-                <h1>Get in Touch</h1>
-                <p>Let's elevate your café's reach and offline footfall</p>
-            </div>
-        </div>
-        <div class="container" style="padding: 6rem 0; max-width: 650px; text-align: center;">
-            <div class="reveal">
-                <p style="font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; line-height: 1.8; color: var(--gray-warm); margin-bottom: 3rem; font-style: italic;">
-                    Ready to transform your café into Bengaluru's next student hotspot? Connect with our team today for a shoot strategy call.
-                </p>
-                <div style="margin-bottom: 2rem;">
-                    <span style="display: block; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent-blue); margin-bottom: 0.5rem; font-weight: 600;">WhatsApp Business</span>
-                    <a href="https://wa.me/?text=Hi%20PPAPERFORTUNE%20team,%20we%20want%20to%20discuss%20a%20marketing%20strategy%20for%20our%20cafe." style="font-size: 1.2rem; color: var(--charcoal); text-decoration: none; font-weight: 500;">Chat with Vinay (Partnerships Lead)</a>
-                </div>
-                <div style="margin-bottom: 2rem;">
-                    <span style="display: block; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent-blue); margin-bottom: 0.5rem; font-weight: 600;">Location & Focus</span>
-                    <span style="font-size: 1.1rem; color: var(--charcoal);">Bengaluru, India (Presidency University Hub)</span>
-                </div>
-                <div style="margin-top: 3rem;">
-                    <a href="https://wa.me/?text=Hi%20PPAPERFORTUNE,%20I'd%20like%20to%20book%20a%20strategy%20call." style="display: inline-block; padding: 1rem 2rem; border: 1px solid var(--accent-blue); color: var(--charcoal); text-decoration: none; font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; transition: all 0.3s ease;">Book Strategy Session</a>
-                </div>
-            </div>
+    <div class="about-hero" style="height: 50vh;">
+        <div class="about-hero-content">
+            <h1>Get in Touch</h1>
+            <p>Let's elevate your café's reach and offline footfall</p>
         </div>
     </div>
+    <div class="container" style="padding: 6rem 0; max-width: 900px; text-align: center;">
+        <div class="reveal">
+            <p style="font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; line-height: 1.8; font-style: italic;">
+                Ready to transform your café into Bengaluru's next student hotspot? Connect with our team today for a shoot strategy call.
+            </p>
+
+            <div class="contact-grid">
+                <a class="contact-card" href="https://wa.me/919840631999?text=Hi%20PPAPERFORTUNE%20team,%20we%20want%20to%20discuss%20a%20marketing%20strategy%20for%20our%20cafe." target="_blank" rel="noopener">
+                    <span class="contact-label">WhatsApp / Call · Vinay</span>
+                    <span class="contact-value">+91 98406 31999</span>
+                    <span class="contact-note">Partnerships Lead · primary contact</span>
+                </a>
+                <a class="contact-card" href="tel:+918296868247">
+                    <span class="contact-label">Alternate Number</span>
+                    <span class="contact-value">+91 82968 68247</span>
+                    <span class="contact-note">Call us if the primary line is busy</span>
+                </a>
+                <a class="contact-card" href="mailto:ppaperfortune.studio@gmail.com">
+                    <span class="contact-label">Email</span>
+                    <span class="contact-value">ppaperfortune.studio@gmail.com</span>
+                    <span class="contact-note">Proposals & collaborations</span>
+                </a>
+                <a class="contact-card" href="https://www.instagram.com/ppaperfortune.studio" target="_blank" rel="noopener">
+                    <span class="contact-label">Instagram</span>
+                    <span class="contact-value">@ppaperfortune.studio</span>
+                    <span class="contact-note">See our latest work</span>
+                </a>
+            </div>
+
+            <div style="margin-bottom: 2.5rem;">
+                <span class="contact-label">Location & Focus</span>
+                <span style="font-size: 1.1rem; color: var(--charcoal);">Bengaluru, India (Presidency University Hub)</span>
+            </div>
+
+            <a href="https://wa.me/919840631999?text=Hi%20PPAPERFORTUNE,%20I'd%20like%20to%20book%20a%20strategy%20call." target="_blank" rel="noopener" style="display: inline-block; padding: 1rem 2rem; border: 1px solid var(--accent-blue); color: var(--charcoal); text-decoration: none; font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase;">Book Strategy Session</a>
+        </div>
+    </div>
+</div>
 
     <!-- Footer -->
     <footer class="footer" id="footer">
@@ -2015,18 +2046,22 @@ button, a { -webkit-tap-highlight-color: transparent; }
                     </ul>
                 </div>
                 <div class="footer-links">
-                    <h4>Connect</h4>
-                    <ul>
-                        <li><a href="https://wa.me/?text=Hi%20PPAPERFORTUNE" target="_blank">WhatsApp</a></li>
-                        <li><a href="https://ppaperfortune.in">ppaperfortune.in</a></li>
-                    </ul>
-                </div>
+    <h4>Connect</h4>
+    <ul>
+        <li><a href="https://wa.me/919840631999?text=Hi%20PPAPERFORTUNE" target="_blank" rel="noopener">WhatsApp: 98406 31999</a></li>
+        <li><a href="tel:+918296868247">Alternate: 82968 68247</a></li>
+        <li><a href="mailto:ppaperfortune.studio@gmail.com">ppaperfortune.studio@gmail.com</a></li>
+        <li><a href="https://www.instagram.com/ppaperfortune.studio" target="_blank" rel="noopener">@ppaperfortune.studio</a></li>
+        <li><a href="https://ppaperfortune.in">ppaperfortune.in</a></li>
+    </ul>
+</div>
             </div>
             <div class="footer-bottom">
                 <p>© 2026 PPAPERFORTUNE. All rights reserved.</p>
-                <div class="social-links">
-                    <a href="https://wa.me/?text=Hi%20PPAPERFORTUNE" target="_blank">WhatsApp</a>
-                </div>
+               <div class="social-links">
+    <a href="https://www.instagram.com/ppaperfortune.studio" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://wa.me/919840631999?text=Hi%20PPAPERFORTUNE" target="_blank" rel="noopener">WhatsApp</a>
+</div>
             </div>
         </div>
     </footer>
