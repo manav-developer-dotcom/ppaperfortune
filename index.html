@@ -1,0 +1,2206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PPAPERFORTUNE — Creative, Digital & Experiential Growth Agency</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@200;300;400;500;600&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --indigo: #1e2421;
+            --indigo-light: #28302c;
+            --off-white: #faf9f6;
+            --paper: #f0eae1;
+            --charcoal: #141715;
+            --gray-warm: #a3b0a7;
+            --gray-light: #d0d7d2;
+            --accent-blue: #c87d55;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--off-white);
+            color: var(--charcoal);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--off-white);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--gray-light);
+            border-radius: 3px;
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            letter-spacing: -0.02em;
+        }
+
+        .logo-text {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            font-size: 1.1rem;
+        }
+
+        .logo-script {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+        }
+
+        /* Navigation */
+        .nav-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 2rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            background: transparent;
+        }
+
+        .nav-container.scrolled {
+            background: rgba(250, 249, 246, 0.94);
+            backdrop-filter: blur(20px);
+            padding: 1.2rem 3rem;
+            box-shadow: 0 1px 20px rgba(0,0,0,0.04);
+        }
+
+        .nav-logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.4s ease;
+        }
+
+        .nav-logo:hover {
+            transform: scale(1.02);
+        }
+
+        .nav-logo .logo-text {
+            color: var(--off-white);
+            font-size: 0.85rem;
+            letter-spacing: 0.4em;
+        }
+
+        .nav-logo .logo-script {
+            color: var(--accent-blue);
+            font-size: 0.75rem;
+            margin-top: -2px;
+        }
+
+        .nav-container.scrolled .nav-logo .logo-text {
+            color: var(--charcoal);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--off-white);
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            font-weight: 400;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-container.scrolled .nav-links a {
+            color: var(--charcoal);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent-blue);
+            transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .mobile-menu-btn span {
+            width: 24px;
+            height: 1px;
+            background: var(--off-white);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container.scrolled .mobile-menu-btn span {
+            background: var(--charcoal);
+        }
+
+        /* Page Sections */
+        .page {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+        }
+
+        .page.active {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            width: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: var(--charcoal);
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #141715 0%, #1e2421 50%, #28302c 100%);
+            opacity: 1;
+        }
+
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 50%, rgba(200, 125, 85, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 80%, rgba(30, 36, 33, 0.3) 0%, transparent 50%);
+            animation: heroPulse 12s ease-in-out infinite;
+        }
+
+        @keyframes heroPulse {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-2%, -2%) scale(1.05); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: var(--off-white);
+            max-width: 900px;
+            padding: 0 2rem;
+        }
+
+        .hero-logo {
+            margin-bottom: 2rem;
+            animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+        }
+
+        .hero-logo .logo-text {
+            font-size: 3.2rem;
+            letter-spacing: 0.4em;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-logo .logo-script {
+            font-size: 1.6rem;
+            display: block;
+            color: var(--accent-blue);
+        }
+
+        .hero-tagline {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 300;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--gray-light);
+            opacity: 0;
+            animation: fadeInUp 1.2s 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            line-height: 1.4;
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            opacity: 0;
+            animation: fadeIn 1s 1.2s ease forwards;
+        }
+
+        .hero-scroll span {
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gray-warm);
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--gray-warm), transparent);
+            animation: scrollPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 0.3; transform: scaleY(0.5); }
+            50% { opacity: 1; transform: scaleY(1); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 8rem 0;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-label {
+            font-size: 0.7rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--accent-blue);
+            margin-bottom: 1.5rem;
+            display: block;
+            font-weight: 600;
+        }
+
+        .section-title {
+            font-size: 3.5rem;
+            font-weight: 300;
+            line-height: 1.1;
+            color: var(--charcoal);
+        }
+
+        .section-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-style: italic;
+            color: var(--gray-warm);
+            margin-top: 1rem;
+            font-weight: 400;
+        }
+
+        /* Featured Works / Services */
+        .works-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .work-card {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            background: var(--paper);
+            aspect-ratio: 3/4;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .work-card:nth-child(2) {
+            margin-top: 4rem;
+        }
+
+        .work-card:nth-child(3) {
+            margin-top: 2rem;
+        }
+
+        .work-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .work-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
+            filter: grayscale(15%) contrast(1.05);
+        }
+
+        .work-card:hover img {
+            transform: scale(1.05);
+            filter: grayscale(0%) contrast(1);
+        }
+
+        .work-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 2rem;
+            background: linear-gradient(to top, rgba(20,23,21,0.95), transparent);
+            color: var(--off-white);
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .work-card:hover .work-info {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .work-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 400;
+            margin-bottom: 0.3rem;
+        }
+
+        .work-desc {
+            font-size: 0.82rem;
+            color: var(--gray-light);
+            font-style: italic;
+        }
+
+        /* Process Section */
+        .process-section {
+            background: var(--charcoal);
+            color: var(--off-white);
+            padding: 8rem 0;
+        }
+
+        .process-section .section-title {
+            color: var(--off-white);
+        }
+
+        .process-section .section-label {
+            color: var(--accent-blue);
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+        }
+
+        .process-step::after {
+            content: '';
+            position: absolute;
+            top: 2rem;
+            right: -1rem;
+            width: 2rem;
+            height: 1px;
+            background: var(--gray-warm);
+            opacity: 0.3;
+        }
+
+        .process-step:last-child::after {
+            display: none;
+        }
+
+        .step-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 300;
+            color: var(--accent-blue);
+            margin-bottom: 1.5rem;
+            line-height: 1;
+        }
+
+        .step-title {
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            color: var(--off-white);
+        }
+
+        .step-desc {
+            font-size: 0.85rem;
+            color: var(--gray-warm);
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        /* Philosophy */
+        .philosophy {
+            padding: 10rem 0;
+            background: var(--paper);
+        }
+
+        .philosophy-content {
+            max-width: 850px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .philosophy-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.7rem;
+            line-height: 1.8;
+            font-weight: 300;
+            color: var(--charcoal);
+            font-style: italic;
+        }
+
+        .philosophy-text p {
+            margin-bottom: 2rem;
+        }
+
+        .philosophy-signature {
+            margin-top: 3rem;
+            font-size: 0.8rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--accent-blue);
+            font-weight: 500;
+        }
+
+        /* Shop / Retainers Page */
+        .shop-hero {
+            height: 60vh;
+            background: var(--charcoal);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .shop-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(200, 125, 85, 0.2) 0%, transparent 70%);
+        }
+
+        .shop-hero-content {
+            text-align: center;
+            color: var(--off-white);
+            position: relative;
+            z-index: 2;
+        }
+
+        .shop-hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .shop-hero-content p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-style: italic;
+            color: var(--gray-light);
+        }
+
+        .shop-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4rem;
+            padding: 6rem 0;
+        }
+
+        .product-card {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .product-image {
+            aspect-ratio: 4/5;
+            background: var(--paper);
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.03);
+        }
+
+        .product-tag {
+            position: absolute;
+            top: 1.5rem;
+            left: 1.5rem;
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            background: var(--off-white);
+            color: var(--charcoal);
+            padding: 0.4rem 1rem;
+            z-index: 2;
+            font-weight: 500;
+        }
+
+        .product-details h3 {
+            font-size: 1.6rem;
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+        }
+
+        .product-desc {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--gray-warm);
+            margin-bottom: 1rem;
+        }
+
+        .product-price {
+            font-size: 0.95rem;
+            letter-spacing: 0.1em;
+            color: var(--accent-blue);
+            font-weight: 600;
+        }
+
+        /* Product Detail Page */
+        .product-detail {
+            padding-top: 0;
+        }
+
+        .product-detail-hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 100vh;
+        }
+
+        .product-gallery {
+            background: var(--paper);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-gallery img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-info-panel {
+            padding: 6rem 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: var(--off-white);
+        }
+
+        .product-info-panel .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--gray-warm);
+            text-decoration: none;
+            margin-bottom: 3rem;
+            transition: color 0.3s ease;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-family: inherit;
+        }
+
+        .product-info-panel .back-btn:hover {
+            color: var(--charcoal);
+        }
+
+        .product-info-panel h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        .product-info-panel .poetic-desc {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25rem;
+            font-style: italic;
+            color: var(--gray-warm);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .product-meta {
+            margin: 2rem 0;
+            padding: 2rem 0;
+            border-top: 1px solid var(--paper);
+            border-bottom: 1px solid var(--paper);
+        }
+
+        .meta-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.8rem 0;
+            font-size: 0.85rem;
+        }
+
+        .meta-label {
+            color: var(--gray-warm);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+        }
+
+        .meta-value {
+            color: var(--charcoal);
+            font-weight: 400;
+        }
+
+        .order-section {
+            margin-top: 2rem;
+        }
+
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .qty-btn {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--paper);
+            background: transparent;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--charcoal);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qty-btn:hover {
+            background: var(--charcoal);
+            color: var(--off-white);
+            border-color: var(--charcoal);
+        }
+
+        .qty-value {
+            font-size: 1rem;
+            font-weight: 500;
+            min-width: 2rem;
+            text-align: center;
+        }
+
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            background: var(--charcoal);
+            color: var(--off-white);
+            padding: 1.2rem 3rem;
+            text-decoration: none;
+            font-size: 0.8rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .whatsapp-btn:hover {
+            background: var(--accent-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .care-note {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: var(--paper);
+            font-size: 0.8rem;
+            line-height: 1.6;
+            color: var(--gray-warm);
+        }
+
+        .care-note strong {
+            color: var(--charcoal);
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        /* About Page */
+        .about-hero {
+            height: 70vh;
+            background: var(--charcoal);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .about-hero-content {
+            max-width: 750px;
+            text-align: center;
+            color: var(--off-white);
+            padding: 0 2rem;
+        }
+
+        .about-hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .about-hero-content p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.35rem;
+            line-height: 1.8;
+            font-style: italic;
+            color: var(--gray-light);
+            font-weight: 300;
+        }
+
+        .about-content {
+            padding: 6rem 0;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+            margin-bottom: 6rem;
+        }
+
+        .about-grid.reverse {
+            direction: rtl;
+        }
+
+        .about-grid.reverse > * {
+            direction: ltr;
+        }
+
+        .about-image {
+            aspect-ratio: 4/5;
+            background: var(--paper);
+            overflow: hidden;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(20%);
+            transition: filter 0.6s ease;
+        }
+
+        .about-image:hover img {
+            filter: grayscale(0%);
+        }
+
+        .about-text h3 {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        .about-text p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--gray-warm);
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+        }
+
+        /* Process/Care Page */
+        .process-page-hero {
+            background: var(--indigo);
+            color: var(--off-white);
+            padding: 10rem 0 6rem;
+            text-align: center;
+        }
+
+        .process-page-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .process-page-hero p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-style: italic;
+            color: var(--gray-light);
+        }
+
+        .process-detail {
+            padding: 6rem 0;
+        }
+
+        .process-detail-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .process-detail-item {
+            padding: 3rem;
+            background: var(--paper);
+        }
+
+        .process-detail-item h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        .process-detail-item p {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: var(--gray-warm);
+            font-weight: 300;
+        }
+
+        .care-section {
+            background: var(--charcoal);
+            color: var(--off-white);
+            padding: 6rem 0;
+        }
+
+        .care-section .section-title {
+            color: var(--off-white);
+        }
+
+        .care-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .care-card {
+            text-align: center;
+            padding: 2rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.4s ease;
+        }
+
+        .care-card:hover {
+            border-color: rgba(200, 125, 85, 0.4);
+            background: rgba(255,255,255,0.03);
+        }
+
+        .care-icon {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.8;
+            color: var(--accent-blue);
+        }
+
+        .care-card h4 {
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .care-card p {
+            font-size: 0.85rem;
+            color: var(--gray-warm);
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--charcoal);
+            color: var(--off-white);
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-brand .logo-text {
+            color: var(--off-white);
+            font-size: 1rem;
+            margin-bottom: 0.3rem;
+            display: block;
+        }
+
+        .footer-brand .logo-script {
+            color: var(--accent-blue);
+            font-size: 0.9rem;
+            display: block;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-brand p {
+            font-size: 0.85rem;
+            color: var(--gray-warm);
+            line-height: 1.6;
+            max-width: 320px;
+            font-weight: 300;
+        }
+
+        .footer-links h4 {
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            color: var(--gray-light);
+            font-weight: 500;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--gray-warm);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s ease;
+            font-weight: 300;
+        }
+
+        .footer-links a:hover {
+            color: var(--off-white);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-bottom p {
+            font-size: 0.75rem;
+            color: var(--gray-warm);
+            letter-spacing: 0.1em;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .social-links a {
+            color: var(--gray-warm);
+            text-decoration: none;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--off-white);
+        }
+
+        /* Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: var(--charcoal);
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .mobile-menu.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .mobile-menu a {
+            color: var(--off-white);
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .works-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .process-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .process-step:nth-child(3)::after {
+                display: none;
+            }
+            .care-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .product-detail-hero {
+                grid-template-columns: 1fr;
+            }
+            .about-grid, .about-grid.reverse {
+                grid-template-columns: 1fr;
+                direction: ltr;
+            }
+            .about-grid.reverse > * {
+                direction: ltr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .mobile-menu-btn {
+                display: flex;
+            }
+            .hero-logo .logo-text {
+                font-size: 2rem;
+                letter-spacing: 0.3em;
+            }
+            .hero-logo .logo-script {
+                font-size: 1.2rem;
+            }
+            .section-title {
+                font-size: 2.5rem;
+            }
+            .works-grid {
+                grid-template-columns: 1fr;
+            }
+            .work-card:nth-child(2),
+            .work-card:nth-child(3) {
+                margin-top: 0;
+            }
+            .process-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            .process-step::after {
+                display: none;
+            }
+            .shop-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            .care-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .container {
+                padding: 0 1.5rem;
+            }
+            .nav-container {
+                padding: 1.5rem;
+            }
+            .nav-container.scrolled {
+                padding: 1rem 1.5rem;
+            }
+            .product-info-panel {
+                padding: 3rem 1.5rem;
+            }
+            .process-detail-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Loading State */
+        .page-transition {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--charcoal);
+            z-index: 9999;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        .page-transition.active {
+            opacity: 1;
+        }
+    
+/* ===== Colour grade: warm espresso + antique gold ===== */
+:root {
+  --indigo: #1a130e;
+  --indigo-light: #2a1f17;
+  --off-white: #fbf7f0;
+  --paper: #f1e6d4;
+  --charcoal: #16100c;
+  --gray-warm: #bfae98;     /* soft taupe for text on dark */
+  --gray-light: #e3d6c3;
+  --accent-blue: #a8672a;   /* deep copper: readable on cream */
+  --gold: #d4a85f;          /* bright gold for dark sections */
+  --muted: #6e5f50;         /* readable body text on light */
+}
+::-webkit-scrollbar-thumb { background: #d8c6a8; }
+
+.hero-bg { background: linear-gradient(135deg, #120d0a 0%, #1f1610 50%, #33241a 100%); }
+.hero-bg::before {
+  background: radial-gradient(circle at 30% 50%, rgba(212,168,95,.18) 0%, transparent 50%),
+              radial-gradient(circle at 70% 80%, rgba(90,55,30,.35) 0%, transparent 50%);
+}
+.shop-hero::before { background: radial-gradient(circle at 50% 50%, rgba(212,168,95,.22) 0%, transparent 70%); }
+.nav-container.scrolled { background: rgba(251,247,240,.94); }
+.work-info { background: linear-gradient(to top, rgba(22,16,12,.95), transparent); }
+.care-card:hover { border-color: rgba(212,168,95,.45); }
+
+/* Fix low-contrast grey text on light backgrounds */
+.section-subtitle, .product-desc, .product-info-panel .poetic-desc,
+.about-text p, .process-detail-item p, .care-note, .meta-label,
+.product-info-panel .back-btn, #page-contact .container p { color: var(--muted) !important; }
+
+/* Gold accents on dark sections */
+.process-section .section-label, .care-section .section-label,
+.step-number, .care-icon, .philosophy-signature { color: var(--gold); }
+.philosophy-signature { color: var(--accent-blue); }
+
+/* Consistent warm grade on all photography */
+.work-card img, .about-image img, .product-image img, .product-gallery img {
+  filter: sepia(.14) saturate(1.08) contrast(1.05) brightness(.97);
+}
+.work-card:hover img, .about-image:hover img {
+  filter: sepia(.06) saturate(1.12) contrast(1.02);
+}
+
+/* ===== "Fortune": cursive, lavish gold script (nav, hero, footer) ===== */
+.logo-script {
+  font-family: 'Pinyon Script', 'Playfair Display', cursive;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: .02em;
+  padding: .1em .2em;
+  background-image: linear-gradient(100deg, #f3dfae 0%, #d4a85f 40%, #f6e6bd 62%, #b98a3e 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  filter: drop-shadow(0 2px 8px rgba(212,168,95,.35));
+}
+.nav-logo .logo-script { font-size: 1.6rem; margin-top: -8px; }
+.hero-logo .logo-script { font-size: 4.4rem; margin-top: -.6rem; }
+.footer-brand .logo-script { font-size: 2.2rem; margin-bottom: 1rem; }
+.nav-container.scrolled .nav-logo .logo-script {
+  background-image: linear-gradient(100deg, #b8863a, #8f5f1f 50%, #c99a4d);
+  filter: none;
+}
+@media (max-width: 768px) {
+  .hero-logo .logo-script { font-size: 3rem; }
+}
+
+
+
+/* =========================================================
+   PPAPERFORTUNE — premium brand refinement
+   Focus: precise logo alignment, restrained luxury palette,
+   editorial typography, consistent surfaces and photography.
+   ========================================================= */
+:root {
+  --indigo: #211811;
+  --indigo-light: #302319;
+  --off-white: #f8f5ef;
+  --paper: #eee5d8;
+  --charcoal: #1b1510;
+  --gray-warm: #b8a895;
+  --gray-light: #dfd3c4;
+  --accent-blue: #a97943;
+  --gold: #c7a36b;
+  --muted: #716252;
+  --espresso-deep: #17110d;
+  --espresso: #251a13;
+  --espresso-soft: #38281d;
+  --parchment: #f8f4ed;
+  --brass: #c5a06a;
+  --brass-light: #e2c99e;
+  --ink: #241b14;
+  --ink-soft: #625447;
+  --line-warm: rgba(91, 68, 45, .16);
+}
+
+/* Global colour consistency */
+html { background: var(--parchment); }
+body {
+  background: var(--parchment);
+  color: var(--ink);
+  text-rendering: optimizeLegibility;
+}
+::selection { background: rgba(197,160,106,.28); color: var(--espresso-deep); }
+::-webkit-scrollbar-track { background: #eee6da; }
+::-webkit-scrollbar-thumb { background: #bca88d; border: 1px solid #eee6da; }
+
+/* Brand lockup: shared geometry across header, hero and footer */
+.logo-text,
+.logo-script {
+  display: block;
+  width: 100%;
+  text-align: center;
+  white-space: nowrap;
+}
+.logo-text {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  letter-spacing: .31em;
+  line-height: 1;
+  padding-left: .31em; /* optical centring compensates for tracking */
+  text-transform: uppercase;
+}
+.logo-script {
+  font-family: 'Pinyon Script', cursive;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: .015em;
+  line-height: .92;
+  padding: 0 .12em .12em;
+  background: linear-gradient(105deg, #f0dfbd 0%, #c9a36b 38%, #ead5ae 58%, #a77b45 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  filter: drop-shadow(0 2px 5px rgba(18,12,8,.18));
+}
+
+/* Navigation logo */
+.nav-container {
+  padding: 1.45rem clamp(1.25rem, 4.5vw, 4.25rem);
+}
+.nav-logo {
+  width: 148px;
+  min-width: 148px;
+  gap: .08rem;
+  align-items: center;
+  justify-content: center;
+  transform-origin: center;
+}
+.nav-logo .logo-text {
+  color: #f7f1e8;
+  font-size: .76rem;
+  letter-spacing: .28em;
+  padding-left: .28em;
+}
+.nav-logo .logo-script {
+  font-size: 2rem;
+  margin: -.08rem 0 0;
+  line-height: .8;
+}
+.nav-container.scrolled {
+  padding: .9rem clamp(1.25rem, 4.5vw, 4.25rem);
+  background: rgba(248,245,239,.96);
+  border-bottom: 1px solid rgba(92,69,45,.10);
+  box-shadow: 0 8px 30px rgba(35,25,17,.055);
+}
+.nav-container.scrolled .nav-logo .logo-text { color: var(--espresso); }
+.nav-container.scrolled .nav-logo .logo-script {
+  background-image: linear-gradient(105deg, #9b6d39, #c19a60 48%, #8f6334);
+  filter: none;
+}
+.nav-links { align-items: center; gap: clamp(1.2rem, 2.5vw, 2.5rem); }
+.nav-links a {
+  font-weight: 500;
+  letter-spacing: .13em;
+  transition: color .25s ease, opacity .25s ease;
+}
+.nav-container.scrolled .nav-links a { color: #403328; }
+.nav-container.scrolled .nav-links a:hover { color: #9b713f; }
+
+/* Hero: deep roasted-coffee tones with a subtle brass light source */
+.hero { background: var(--espresso-deep); }
+.hero-bg {
+  background:
+    radial-gradient(ellipse at 50% 42%, rgba(121,82,48,.25), transparent 48%),
+    linear-gradient(118deg, #17110d 0%, #241910 48%, #302116 100%);
+}
+.hero-bg::before {
+  background:
+    radial-gradient(ellipse at 50% 43%, rgba(207,169,111,.17) 0%, transparent 43%),
+    radial-gradient(ellipse at 12% 88%, rgba(111,73,42,.18) 0%, transparent 42%),
+    linear-gradient(90deg, rgba(10,7,5,.18), transparent 50%, rgba(10,7,5,.12));
+  animation: none;
+}
+.hero-content { max-width: 980px; padding-inline: 2rem; }
+.hero-logo {
+  width: min(100%, 650px);
+  margin: 0 auto 2.15rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .2rem;
+}
+.hero-logo .logo-text {
+  color: #f7f0e6;
+  font-size: clamp(2.2rem, 5.1vw, 4.15rem);
+  letter-spacing: .34em;
+  padding-left: .34em;
+  line-height: 1;
+}
+.hero-logo .logo-script {
+  font-size: clamp(3.3rem, 7.4vw, 5.7rem);
+  line-height: .78;
+  margin: -.08rem 0 .15rem;
+  filter: drop-shadow(0 3px 12px rgba(197,160,106,.17));
+}
+.hero-tagline {
+  max-width: 700px;
+  margin: 0 auto;
+  color: #d8cabb;
+  font-size: clamp(1rem, 1.55vw, 1.35rem);
+  letter-spacing: .105em;
+  line-height: 1.65;
+}
+.hero-scroll { color: #cdbb9f; }
+.hero-scroll .scroll-line { background: linear-gradient(to bottom, #c5a06a, transparent); }
+
+/* More deliberate editorial hierarchy and warm neutral surfaces */
+.section { background: var(--parchment); }
+.section:nth-of-type(even) { background: #f1e9de; }
+.section-label {
+  color: #9a7145;
+  letter-spacing: .23em;
+  font-weight: 600;
+}
+.section-title {
+  color: #2b2018;
+  letter-spacing: -.025em;
+}
+.section-subtitle {
+  color: #756657 !important;
+  line-height: 1.8;
+}
+.work-card,
+.care-card,
+.product-info-panel,
+.process-detail-item {
+  border-color: var(--line-warm);
+}
+.work-card {
+  background: #e8ddce;
+  box-shadow: 0 12px 34px rgba(45,31,19,.07);
+}
+.work-info {
+  background: linear-gradient(to top, rgba(25,17,12,.94) 0%, rgba(25,17,12,.48) 58%, transparent 100%);
+}
+.care-card {
+  background: rgba(255,252,247,.72);
+  box-shadow: 0 10px 30px rgba(47,33,21,.035);
+}
+.care-card:hover {
+  border-color: rgba(173,132,78,.55);
+  box-shadow: 0 18px 38px rgba(47,33,21,.075);
+}
+button, a { -webkit-tap-highlight-color: transparent; }
+
+/* Photography: cohesive warm editorial grade, not heavy sepia */
+.work-card img,
+.about-image img,
+.product-image img,
+.product-gallery img {
+  filter: sepia(.09) saturate(.91) contrast(1.055) brightness(.94);
+  transition: filter .65s ease, transform .8s cubic-bezier(.2,.65,.25,1);
+}
+.work-card:hover img,
+.about-image:hover img {
+  filter: sepia(.035) saturate(1.02) contrast(1.035) brightness(.99);
+}
+.product-gallery img { background: #e8ddce; }
+
+/* Footer: dark espresso, balanced gold wordmark */
+.footer {
+  background:
+    radial-gradient(ellipse at 15% 0%, rgba(145,103,59,.13), transparent 38%),
+    linear-gradient(135deg, #1a120d, #251a13 62%, #2c1f15);
+  border-top: 1px solid rgba(197,160,106,.18);
+}
+.footer-brand { display: flex; flex-direction: column; align-items: flex-start; }
+.footer-brand .logo-text {
+  width: auto;
+  text-align: left;
+  color: #f4eee5;
+  font-size: .95rem;
+  letter-spacing: .3em;
+  padding-left: .3em;
+  margin-bottom: .05rem;
+}
+.footer-brand .logo-script {
+  width: auto;
+  text-align: left;
+  font-size: 2.65rem;
+  line-height: .8;
+  margin: 0 0 1.25rem -.06rem;
+}
+.footer-brand p { color: #c2b3a1; }
+.footer-links h4 { color: #d7c6ad; }
+.footer-links a { color: #b9a995; }
+.footer-links a:hover { color: #e0c18d; }
+
+/* Readable text on warm backgrounds */
+.product-desc,
+.product-info-panel .poetic-desc,
+.about-text p,
+.process-detail-item p,
+.care-note,
+.meta-label,
+.product-info-panel .back-btn,
+#page-contact .container p {
+  color: var(--ink-soft) !important;
+}
+
+/* Mobile: preserve the lockup proportions and prevent clipping */
+@media (max-width: 768px) {
+  .nav-container { padding: 1rem 1.15rem; }
+  .nav-container.scrolled { padding: .72rem 1.15rem; }
+  .nav-logo { width: 126px; min-width: 126px; }
+  .nav-logo .logo-text { font-size: .68rem; letter-spacing: .24em; padding-left: .24em; }
+  .nav-logo .logo-script { font-size: 1.75rem; }
+  .hero-content { padding-inline: 1.25rem; }
+  .hero-logo { margin-bottom: 1.55rem; }
+  .hero-logo .logo-text {
+    font-size: clamp(1.7rem, 8vw, 2.6rem);
+    letter-spacing: .25em;
+    padding-left: .25em;
+  }
+  .hero-logo .logo-script {
+    font-size: clamp(3.1rem, 15vw, 4.25rem);
+    margin-top: 0;
+  }
+  .hero-tagline { max-width: 34rem; font-size: 1rem; letter-spacing: .055em; }
+  .footer-brand .logo-script { font-size: 2.35rem; }
+}
+@media (max-width: 380px) {
+  .hero-logo .logo-text { font-size: 1.55rem; letter-spacing: .2em; padding-left: .2em; }
+  .hero-logo .logo-script { font-size: 2.9rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .work-card img, .about-image img { transition: none; }
+}
+
+</style>
+</head>
+<body>
+
+    <!-- Page Transition Overlay -->
+    <div class="page-transition" id="pageTransition"></div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#" onclick="navigateTo('home'); return false;">Home</a>
+        <a href="#" onclick="navigateTo('shop'); return false;">Retainers</a>
+        <a href="#" onclick="navigateTo('process'); return false;">Services</a>
+        <a href="#" onclick="navigateTo('about'); return false;">About</a>
+        <a href="#" onclick="navigateTo('contact'); return false;">Contact</a>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav-container" id="navbar">
+        <div class="nav-logo" onclick="navigateTo('home')">
+            <span class="logo-text">Ppaper</span>
+            <span class="logo-script">Fortune</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#" onclick="navigateTo('home'); return false;">Home</a></li>
+            <li><a href="#" onclick="navigateTo('shop'); return false;">Retainers</a></li>
+            <li><a href="#" onclick="navigateTo('process'); return false;">Services</a></li>
+            <li><a href="#" onclick="navigateTo('about'); return false;">About</a></li>
+            <li><a href="#" onclick="navigateTo('contact'); return false;">Contact</a></li>
+        </ul>
+        <div class="mobile-menu-btn" onclick="toggleMobileMenu()">
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- HOME PAGE -->
+    <div class="page active" id="page-home">
+        <!-- Hero -->
+        <section class="hero">
+            <div class="hero-bg"></div>
+            <div class="hero-content">
+                <div class="hero-logo">
+                    <span class="logo-text">Ppaper</span>
+                    <span class="logo-script">Fortune</span>
+                </div>
+                <p class="hero-tagline">Bringing Bengaluru's Finest Cafés to Every Student's Feed & Table</p>
+            </div>
+            <div class="hero-scroll">
+                <span>Explore Agency</span>
+                <div class="scroll-line"></div>
+            </div>
+        </section>
+
+        <!-- Featured Works / Core Deliverables -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-label">Core Pillars</span>
+                    <h2 class="section-title">Visual & Experiential Growth</h2>
+                    <p class="section-subtitle">Combining high-aesthetic content with real-world footfall drivers</p>
+                </div>
+                <div class="works-grid">
+                    <div class="work-card reveal" onclick="showProduct('starter-vibe')">
+                        <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=800&q=80" alt="Content & Photography">
+                        <div class="work-info">
+                            <h3 class="work-title">4K Reels & Photography</h3>
+                            <p class="work-desc">Ambient food, interior, and barista storytelling</p>
+                        </div>
+                    </div>
+                    <div class="work-card reveal" onclick="showProduct('growth-reach')">
+                        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80" alt="Events & Activations">
+                        <div class="work-info">
+                            <h3 class="work-title">Café Events & Jams</h3>
+                            <p class="work-desc">Live acoustic music sessions & student open mics</p>
+                        </div>
+                    </div>
+                    <div class="work-card reveal" onclick="showProduct('full-experiential')">
+                        <img src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?w=800&q=80" alt="Web & Google SEO">
+                        <div class="work-info">
+                            <h3 class="work-title">Digital Presence & SEO</h3>
+                            <p class="work-desc">Custom mobile menus & Google Maps review domination</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Process / Growth Formula -->
+        <section class="process-section">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-label">The Method</span>
+                    <h2 class="section-title">The Closed-Loop Vibe Formula</h2>
+                </div>
+                <div class="process-grid">
+                    <div class="process-step reveal">
+                        <div class="step-number">01</div>
+                        <h4 class="step-title">Batch Shoot</h4>
+                        <p class="step-desc">On-location 4K photography and high-converting reel production</p>
+                    </div>
+                    <div class="process-step reveal">
+                        <div class="step-number">02</div>
+                        <h4 class="step-title">Feed Curation</h4>
+                        <p class="step-desc">Strategic Instagram grid publishing, trending audio, and student captions</p>
+                    </div>
+                    <div class="process-step reveal">
+                        <div class="step-number">03</div>
+                        <h4 class="step-title">Google Maps SEO</h4>
+                        <p class="step-desc">Optimizing search rankings & on-table QR review capture systems</p>
+                    </div>
+                    <div class="process-step reveal">
+                        <div class="step-number">04</div>
+                        <h4 class="step-title">Creator Visits</h4>
+                        <p class="step-desc">Coordinated influencer dining sessions with local Bengaluru foodies</p>
+                    </div>
+                    <div class="process-step reveal">
+                        <div class="step-number">05</div>
+                        <h4 class="step-title">Live Events</h4>
+                        <p class="step-desc">Hosting acoustic nights & open mics to convert online followers into footfall</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Philosophy -->
+        <section class="philosophy">
+            <div class="container">
+                <div class="philosophy-content reveal">
+                    <div class="philosophy-text">
+                        <p>We believe cafés aren't just places to grab coffee — they are community hubs. Traditional social media management fails because it focuses only on generic posts.</p>
+                        <p>PPAPERFORTUNE acts as a complete growth partner, connecting high-aesthetic digital content directly with real-world student culture around Presidency University.</p>
+                    </div>
+                    <div class="philosophy-signature">Aesthetic Content • Local SEO • Experiential Events</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Instagram Showcase -->
+        <section class="section" style="padding-bottom: 4rem;">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-label">Portfolio</span>
+                    <h2 class="section-title">@ppaperfortune</h2>
+                    <p class="section-subtitle">Visual highlights from our partner cafés</p>
+                </div>
+                <div class="works-grid" style="grid-template-columns: repeat(4, 1fr); gap: 1rem;">
+                    <div class="work-card reveal" style="aspect-ratio: 1;">
+                        <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=600&q=80" alt="Coffee Aesthetic">
+                    </div>
+                    <div class="work-card reveal" style="aspect-ratio: 1;">
+                        <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=600&q=80" alt="Cafe Interior">
+                    </div>
+                    <div class="work-card reveal" style="aspect-ratio: 1;">
+                        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600&q=80" alt="Acoustic Session">
+                    </div>
+                    <div class="work-card reveal" style="aspect-ratio: 1;">
+                        <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&q=80" alt="Pour Over">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- SHOP / RETAINERS PAGE -->
+    <div class="page" id="page-shop">
+        <div class="shop-hero">
+            <div class="shop-hero-content">
+                <h1>Monthly Retainers</h1>
+                <p>Structured packages engineered for café footfall & brand prestige</p>
+            </div>
+        </div>
+        <div class="container">
+            <div class="shop-grid">
+                <div class="product-card reveal" onclick="showProduct('starter-vibe')">
+                    <div class="product-image">
+                        <span class="product-tag">Tier 1</span>
+                        <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=800&q=80" alt="Starter Vibe">
+                    </div>
+                    <div class="product-details">
+                        <h3>Tier 1: Starter Vibe</h3>
+                        <p class="product-desc">Essential social media presence & Google SEO setup</p>
+                        <span class="product-price">₹12,000 – ₹15,000 / month</span>
+                    </div>
+                </div>
+                <div class="product-card reveal" onclick="showProduct('growth-reach')">
+                    <div class="product-image">
+                        <span class="product-tag">Most Popular</span>
+                        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80" alt="Growth & Reach">
+                    </div>
+                    <div class="product-details">
+                        <h3>Tier 2: Growth & Reach</h3>
+                        <p class="product-desc">12 Reels/mo, Influencer Visit & FREE Digital Menu Web App</p>
+                        <span class="product-price">₹20,000 – ₹25,000 / month</span>
+                    </div>
+                </div>
+                <div class="product-card reveal" onclick="showProduct('full-experiential')">
+                    <div class="product-image">
+                        <span class="product-tag">Tier 3</span>
+                        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800&q=80" alt="Full Experiential">
+                    </div>
+                    <div class="product-details">
+                        <h3>Tier 3: Full Experiential</h3>
+                        <p class="product-desc">20 Reels/mo, Weekly Shoots & Live Event Activations</p>
+                        <span class="product-price">₹35,000 – ₹40,000 / month</span>
+                    </div>
+                </div>
+                <div class="product-card reveal" onclick="showProduct('digital-menu')">
+                    <div class="product-image">
+                        <span class="product-tag">Add-On</span>
+                        <img src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?w=800&q=80" alt="Digital Menu Web App">
+                    </div>
+                    <div class="product-details">
+                        <h3>Digital Menu & Table QR Setup</h3>
+                        <p class="product-desc">Custom mobile website, location map, & WhatsApp order link</p>
+                        <span class="product-price">₹10,000 (One-Time Setup)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PRODUCT DETAIL / RETAINER MODAL PAGE -->
+    <div class="page" id="page-product">
+        <div class="product-detail">
+            <div class="product-detail-hero">
+                <div class="product-gallery">
+                    <img id="product-img" src="" alt="">
+                </div>
+                <div class="product-info-panel">
+                    <button class="back-btn" onclick="navigateTo('shop')">← Back to Retainers</button>
+                    <h1 id="product-name">Package Name</h1>
+                    <p class="poetic-desc" id="product-poetic">Description</p>
+                    
+                    <div class="product-meta">
+                        <div class="meta-item">
+                            <span class="meta-label">Deliverables</span>
+                            <span class="meta-value" id="product-material">Reels & Photos</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Shoots</span>
+                            <span class="meta-value" id="product-dims">Monthly Sessions</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Commitment</span>
+                            <span class="meta-value" id="product-edition">3-Month Agreement</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Investment</span>
+                            <span class="meta-value" id="product-price">₹0.00</span>
+                        </div>
+                    </div>
+
+                    <div class="order-section">
+                        <div class="quantity-selector">
+                            <button class="qty-btn" onclick="changeQty(-1)">−</button>
+                            <span class="qty-value" id="qty">1</span>
+                            <button class="qty-btn" onclick="changeQty(1)">+</button>
+                        </div>
+                        <button class="whatsapp-btn" onclick="orderViaWhatsApp()">
+                            Inquire via WhatsApp
+                        </button>
+                    </div>
+
+                    <div class="care-note">
+                        <strong>Founding Client Guarantee</strong>
+                        Every retainer includes dedicated on-site content batching, custom brand alignment, and direct communication with our founding leadership team in Bengaluru.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ABOUT PAGE / TEAM LEADERSHIP -->
+    <div class="page" id="page-about">
+        <div class="about-hero">
+            <div class="about-hero-content">
+                <h1>About PPAPERFORTUNE</h1>
+                <p>An emerging creative, digital marketing, and experiential growth agency initially focused exclusively on the café culture in Bengaluru.</p>
+            </div>
+        </div>
+        <div class="container about-content">
+            <div class="about-grid reveal">
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80" alt="Leadership Operations">
+                </div>
+                <div class="about-text">
+                    <h3>Manav</h3>
+                    <span style="color: var(--accent-blue); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.15em; display: block; margin-bottom: 1rem;">Managing Partner & Digital Operations Lead</span>
+                    <p>Oversees agency strategy, overall business operations, custom web platforms, and Google local SEO systems.</p>
+                </div>
+            </div>
+            <div class="about-grid reverse reveal">
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&q=80" alt="Photography Production">
+                </div>
+                <div class="about-text">
+                    <h3>Abdul</h3>
+                    <span style="color: var(--accent-blue); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.15em; display: block; margin-bottom: 1rem;">Creative Director & Head of Production</span>
+                    <p>Directs visual storytelling, food & ambient photography, videography, cinematic reel edits, and production quality control.</p>
+                </div>
+            </div>
+            <div class="about-grid reveal">
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&q=80" alt="Client Partnerships">
+                </div>
+                <div class="about-text">
+                    <h3>Vinay</h3>
+                    <span style="color: var(--accent-blue); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.15em; display: block; margin-bottom: 1rem;">Client Partnerships & Success Lead</span>
+                    <p>Manages client relations, business development, on-site meetings, proposal presentations, and onboarding.</p>
+                </div>
+            </div>
+            <div class="about-grid reverse reveal">
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80" alt="Social Media Community">
+                </div>
+                <div class="about-text">
+                    <h3>Dhanush</h3>
+                    <span style="color: var(--accent-blue); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.15em; display: block; margin-bottom: 1rem;">Social Media & Community Strategist</span>
+                    <p>Drives Instagram handle management, posting schedules, copywritten captions, trending audio, and audience growth.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PROCESS / SERVICES PAGE -->
+    <div class="page" id="page-process">
+        <div class="process-page-hero">
+            <div class="container">
+                <span class="section-label" style="color: var(--gray-warm);">Full Agency Capabilities</span>
+                <h1>Our Core Services</h1>
+                <p>Tailored solutions built specifically for Bengaluru's food & beverage industry</p>
+            </div>
+        </div>
+        <div class="container process-detail">
+            <div class="process-detail-grid">
+                <div class="process-detail-item reveal">
+                    <h3>1. Content Creation & Production</h3>
+                    <p>Professional café interior, ambiance, food & beverage photography. Cinematic promotional videos, 4K short-form reels, and brand storytelling visuals for seasonal menu launches.</p>
+                </div>
+                <div class="process-detail-item reveal">
+                    <h3>2. Social Media & Community Growth</h3>
+                    <p>End-to-end Instagram handle management, aesthetic grid curation, publishing schedules, copywritten captions, trending audio selection, and active DM engagement.</p>
+                </div>
+            </div>
+            <div class="process-detail-grid">
+                <div class="process-detail-item reveal">
+                    <h3>3. Website & Google Maps SEO</h3>
+                    <p>Custom high-speed café websites, digital mobile menus, table-top QR code menu integration, and Google Business Profile optimization for local search domination.</p>
+                </div>
+                <div class="process-detail-item reveal">
+                    <h3>4. Creator & Influencer Collaborations</h3>
+                    <p>Strategic matching with local food, lifestyle, and student creators in Bengaluru. Organizing hosted tasting visits, food reviews, and co-branded reel campaigns.</p>
+                </div>
+            </div>
+        </div>
+        <div class="care-section">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-label" style="color: var(--gray-warm);">Offline Footfall Drivers</span>
+                    <h2 class="section-title">Café Event Activations</h2>
+                </div>
+                <div class="care-grid">
+                    <div class="care-card reveal">
+                        <div class="care-icon">♫</div>
+                        <h4>Acoustic Sessions</h4>
+                        <p>Live acoustic guitar and vocalist performances curated for weekend dining.</p>
+                    </div>
+                    <div class="care-card reveal">
+                        <div class="care-icon">🎙</div>
+                        <h4>Open Mic Nights</h4>
+                        <p>Student community talent showcases, poetry readings, and jamming sessions.</p>
+                    </div>
+                    <div class="care-card reveal">
+                        <div class="care-icon">✦</div>
+                        <h4>Creator Meets</h4>
+                        <p>Hosted influencer dining experiences and social media tasting pop-ups.</p>
+                    </div>
+                    <div class="care-card reveal">
+                        <div class="care-icon">📷</div>
+                        <h4>Live Coverage</h4>
+                        <p>End-to-end event planning, ticketing, promotion, and highlight reel generation.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTACT PAGE -->
+    <div class="page" id="page-contact">
+        <div class="about-hero" style="height: 50vh;">
+            <div class="about-hero-content">
+                <h1>Get in Touch</h1>
+                <p>Let's elevate your café's reach and offline footfall</p>
+            </div>
+        </div>
+        <div class="container" style="padding: 6rem 0; max-width: 650px; text-align: center;">
+            <div class="reveal">
+                <p style="font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; line-height: 1.8; color: var(--gray-warm); margin-bottom: 3rem; font-style: italic;">
+                    Ready to transform your café into Bengaluru's next student hotspot? Connect with our team today for a shoot strategy call.
+                </p>
+                <div style="margin-bottom: 2rem;">
+                    <span style="display: block; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent-blue); margin-bottom: 0.5rem; font-weight: 600;">WhatsApp Business</span>
+                    <a href="https://wa.me/?text=Hi%20PPAPERFORTUNE%20team,%20we%20want%20to%20discuss%20a%20marketing%20strategy%20for%20our%20cafe." style="font-size: 1.2rem; color: var(--charcoal); text-decoration: none; font-weight: 500;">Chat with Vinay (Partnerships Lead)</a>
+                </div>
+                <div style="margin-bottom: 2rem;">
+                    <span style="display: block; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent-blue); margin-bottom: 0.5rem; font-weight: 600;">Location & Focus</span>
+                    <span style="font-size: 1.1rem; color: var(--charcoal);">Bengaluru, India (Presidency University Hub)</span>
+                </div>
+                <div style="margin-top: 3rem;">
+                    <a href="https://wa.me/?text=Hi%20PPAPERFORTUNE,%20I'd%20like%20to%20book%20a%20strategy%20call." style="display: inline-block; padding: 1rem 2rem; border: 1px solid var(--accent-blue); color: var(--charcoal); text-decoration: none; font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; transition: all 0.3s ease;">Book Strategy Session</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer" id="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo-text">Ppaper</span>
+                    <span class="logo-script">Fortune</span>
+                    <p>Creative, digital marketing, and experiential growth agency transforming café culture in Bengaluru.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Navigate</h4>
+                    <ul>
+                        <li><a href="#" onclick="navigateTo('shop'); return false;">Retainers</a></li>
+                        <li><a href="#" onclick="navigateTo('process'); return false;">Services</a></li>
+                        <li><a href="#" onclick="navigateTo('about'); return false;">Leadership</a></li>
+                        <li><a href="#" onclick="navigateTo('contact'); return false;">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Connect</h4>
+                    <ul>
+                        <li><a href="https://wa.me/?text=Hi%20PPAPERFORTUNE" target="_blank">WhatsApp</a></li>
+                        <li><a href="https://ppaperfortune.in">ppaperfortune.in</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 PPAPERFORTUNE. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="https://wa.me/?text=Hi%20PPAPERFORTUNE" target="_blank">WhatsApp</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Product / Retainer Data
+        const products = {
+            'starter-vibe': {
+                name: 'Tier 1: Starter Vibe',
+                poetic: 'Essential visual presence & local search footprint engineered for emerging cafés near Presidency University.',
+                price: '₹12,000 – ₹15,000 / mo',
+                material: '8 Reels + 1 Photoshoot Session',
+                dims: '1 On-Site Shoot Session / month',
+                edition: '3-Month Initial Agreement',
+                image: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=1000&q=80'
+            },
+            'growth-reach': {
+                name: 'Tier 2: Growth & Reach',
+                poetic: 'Our most popular retainer package. Delivers 3 reels per week, active DM management, local creator visits, and a complimentary Digital Menu Website.',
+                price: '₹20,000 – ₹25,000 / mo',
+                material: '12 Reels + 2 Shoots + Influencer Visit',
+                dims: '2 On-Site Shoot Sessions / month',
+                edition: 'Includes FREE Menu Website',
+                image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1000&q=80'
+            },
+            'full-experiential': {
+                name: 'Tier 3: Full Experiential',
+                poetic: 'Complete market domination. Combines 20 reels per month, weekly photo sessions, Google Maps review systems, and monthly live acoustic/open mic activations.',
+                price: '₹35,000 – ₹40,000 / mo',
+                material: '20 Reels + Weekly Shoots + Live Event',
+                dims: 'Weekly Shoot Sessions',
+                edition: 'Full Experiential Partner',
+                image: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=1000&q=80'
+            },
+            'digital-menu': {
+                name: 'Digital Menu & Table QR Setup',
+                poetic: 'Custom high-speed mobile website featuring your café menu, location map, and direct WhatsApp / delivery integration via on-table QR codes.',
+                price: '₹10,000 (One-Time)',
+                material: 'Mobile Web App + Table QR Codes',
+                dims: 'Responsive Mobile Layout',
+                edition: 'One-Time Setup Fee',
+                image: 'https://images.unsplash.com/photo-1521017432531-fbd92d768814?w=1000&q=80'
+            }
+        };
+
+        let currentQty = 1;
+        let currentProduct = null;
+
+        // Navigation
+        function navigateTo(page) {
+            const transition = document.getElementById('pageTransition');
+            const mobileMenu = document.getElementById('mobileMenu');
+            
+            // Close mobile menu if open
+            mobileMenu.classList.remove('open');
+            
+            // Transition effect
+            transition.classList.add('active');
+            
+            setTimeout(() => {
+                // Hide all pages
+                document.querySelectorAll('.page').forEach(p => {
+                    p.classList.remove('active');
+                });
+                
+                // Show target page
+                const target = document.getElementById('page-' + page);
+                if (target) {
+                    target.classList.add('active');
+                    window.scrollTo(0, 0);
+                }
+                
+                // Update nav state
+                updateNavState(page === 'home');
+                
+                setTimeout(() => {
+                    transition.classList.remove('active');
+                    initReveal();
+                }, 300);
+            }, 400);
+        }
+
+        function updateNavState(isHome) {
+            const nav = document.getElementById('navbar');
+            if (isHome) {
+                nav.classList.remove('scrolled');
+            } else {
+                nav.classList.add('scrolled');
+            }
+        }
+
+        // Mobile Menu
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('open');
+        }
+
+        // Product Detail / Retainer View
+        function showProduct(productId) {
+            const product = products[productId];
+            if (!product) return;
+            
+            currentProduct = product;
+            currentQty = 1;
+            
+            document.getElementById('product-name').textContent = product.name;
+            document.getElementById('product-poetic').textContent = product.poetic;
+            document.getElementById('product-price').textContent = product.price;
+            document.getElementById('product-material').textContent = product.material;
+            document.getElementById('product-dims').textContent = product.dims;
+            document.getElementById('product-edition').textContent = product.edition;
+            document.getElementById('product-img').src = product.image;
+            document.getElementById('product-img').alt = product.name;
+            document.getElementById('qty').textContent = currentQty;
+            
+            navigateTo('product');
+        }
+
+        function changeQty(delta) {
+            currentQty = Math.max(1, currentQty + delta);
+            document.getElementById('qty').textContent = currentQty;
+        }
+
+        function orderViaWhatsApp() {
+            if (!currentProduct) return;
+            
+            const message = `Hello PPAPERFORTUNE Team,\n\nWe are interested in discussing the following retainer package:\n• Package: ${currentProduct.name}\n• Duration: ${currentQty} month(s)\n• Investment: ${currentProduct.price}\n\nPlease let us know when we can schedule an on-site strategy meeting at our cafe.`;
+            
+            const encoded = encodeURIComponent(message);
+            window.open(`https://wa.me/?text=${encoded}`, '_blank');
+        }
+
+        // Scroll Reveal
+        function initReveal() {
+            const reveals = document.querySelectorAll('.reveal');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+            reveals.forEach(el => {
+                el.classList.remove('visible');
+                observer.observe(el);
+            });
+        }
+
+        // Navbar Scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            const homePage = document.getElementById('page-home');
+            
+            if (homePage.classList.contains('active')) {
+                if (window.scrollY > 100) {
+                    nav.classList.add('scrolled');
+                } else {
+                    nav.classList.remove('scrolled');
+                }
+            }
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            initReveal();
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+            });
+        });
+    </script>
+</body>
+</html>
