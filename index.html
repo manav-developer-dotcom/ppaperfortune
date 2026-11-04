@@ -425,6 +425,85 @@
             font-style: italic;
         }
 
+        /* Reels Showcase / Video Section */
+        .reels-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .reel-card {
+            position: relative;
+            aspect-ratio: 9/16;
+            background: var(--charcoal);
+            overflow: hidden;
+            border-radius: 4px;
+            box-shadow: 0 14px 40px rgba(0,0,0,0.12);
+            cursor: pointer;
+        }
+
+        .reel-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s ease;
+        }
+
+        .reel-card:hover img {
+            transform: scale(1.04);
+        }
+
+        .reel-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(20,16,12,0.85) 0%, transparent 60%);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 1.8rem;
+            color: var(--off-white);
+        }
+
+        .play-badge {
+            align-self: flex-end;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.25);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            color: var(--off-white);
+            border: 1px solid rgba(255,255,255,0.3);
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .reel-card:hover .play-badge {
+            transform: scale(1.1);
+            background: var(--gold);
+            color: var(--charcoal);
+        }
+
+        .reel-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 0.3rem;
+        }
+
+        .reel-subtitle {
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
         /* Process Section */
         .process-section {
             background: var(--charcoal);
@@ -525,7 +604,7 @@
             font-weight: 500;
         }
 
-        /* Shop / Retainers Page */
+        /* Shop / Pricing Page */
         .shop-hero {
             height: 60vh;
             background: var(--charcoal);
@@ -621,14 +700,25 @@
             font-size: 1.1rem;
             font-style: italic;
             color: var(--gray-warm);
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
         }
 
-        .product-price {
-            font-size: 0.95rem;
-            letter-spacing: 0.1em;
+        .card-contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.72rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
             color: var(--accent-blue);
             font-weight: 600;
+            padding-bottom: 2px;
+            border-bottom: 1px solid var(--accent-blue);
+            transition: opacity 0.3s ease;
+        }
+
+        .card-contact-btn:hover {
+            opacity: 0.75;
         }
 
         /* Product Detail Page */
@@ -728,43 +818,11 @@
             margin-top: 2rem;
         }
 
-        .quantity-selector {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .qty-btn {
-            width: 40px;
-            height: 40px;
-            border: 1px solid var(--paper);
-            background: transparent;
-            cursor: pointer;
-            font-size: 1.2rem;
-            color: var(--charcoal);
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .qty-btn:hover {
-            background: var(--charcoal);
-            color: var(--off-white);
-            border-color: var(--charcoal);
-        }
-
-        .qty-value {
-            font-size: 1rem;
-            font-weight: 500;
-            min-width: 2rem;
-            text-align: center;
-        }
-
         .whatsapp-btn {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
+            width: 100%;
             gap: 1rem;
             background: var(--charcoal);
             color: var(--off-white);
@@ -799,6 +857,30 @@
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 500;
+        }
+
+        /* Inline Service Contact Block */
+        .service-contact-inline {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--line-warm);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .service-contact-link {
+            font-size: 0.75rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-weight: 600;
+            transition: opacity 0.3s ease;
+        }
+
+        .service-contact-link:hover {
+            opacity: 0.7;
         }
 
         /* About Page */
@@ -919,6 +1001,9 @@
         .process-detail-item {
             padding: 3rem;
             background: var(--paper);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .process-detail-item h3 {
@@ -1128,7 +1213,7 @@
 
         /* Responsive */
         @media (max-width: 1024px) {
-            .works-grid {
+            .works-grid, .reels-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
             .process-grid {
@@ -1169,7 +1254,7 @@
             .section-title {
                 font-size: 2.5rem;
             }
-            .works-grid {
+            .works-grid, .reels-grid {
                 grid-template-columns: 1fr;
             }
             .work-card:nth-child(2),
@@ -1296,8 +1381,6 @@
 @media (max-width: 768px) {
   .hero-logo .logo-script { font-size: 3rem; }
 }
-
-
 
 /* =========================================================
    PPAPERFORTUNE — premium brand refinement
@@ -1604,7 +1687,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
     <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobileMenu">
         <a href="#" onclick="navigateTo('home'); return false;">Home</a>
-        <a href="#" onclick="navigateTo('shop'); return false;">Retainers</a>
+        <a href="#" onclick="navigateTo('shop'); return false;">Pricing</a>
         <a href="#" onclick="navigateTo('process'); return false;">Services</a>
         <a href="#" onclick="navigateTo('about'); return false;">About</a>
         <a href="#" onclick="navigateTo('contact'); return false;">Contact</a>
@@ -1618,7 +1701,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
         </div>
         <ul class="nav-links">
             <li><a href="#" onclick="navigateTo('home'); return false;">Home</a></li>
-            <li><a href="#" onclick="navigateTo('shop'); return false;">Retainers</a></li>
+            <li><a href="#" onclick="navigateTo('shop'); return false;">Pricing</a></li>
             <li><a href="#" onclick="navigateTo('process'); return false;">Services</a></li>
             <li><a href="#" onclick="navigateTo('about'); return false;">About</a></li>
             <li><a href="#" onclick="navigateTo('contact'); return false;">Contact</a></li>
@@ -1675,6 +1758,49 @@ button, a { -webkit-tap-highlight-color: transparent; }
                         <div class="work-info">
                             <h3 class="work-title">Digital Presence & SEO</h3>
                             <p class="work-desc">Custom mobile menus & Google Maps review domination</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- OUR WORK / REELS SHOWCASE SECTION -->
+        <section class="section" style="background: var(--paper);">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-label">Our Work</span>
+                    <h2 class="section-title">Recent Reels & Video Campaigns</h2>
+                    <p class="section-subtitle">Cinematic storytelling crafted for Bengaluru's favorite spots</p>
+                </div>
+                <div class="reels-grid">
+                    <div class="reel-card reveal" onclick="window.open('https://www.instagram.com/ppaperfortune.studio', '_blank')">
+                        <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800&q=80" alt="Café Vibe Reel">
+                        <div class="reel-overlay">
+                            <div class="play-badge">▶</div>
+                            <div>
+                                <span class="reel-subtitle">Atmospheric Storytelling</span>
+                                <h3 class="reel-title">Pour-Over & Morning Aesthetics</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="reel-card reveal" onclick="window.open('https://www.instagram.com/ppaperfortune.studio', '_blank')">
+                        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800&q=80" alt="Acoustic Session Reel">
+                        <div class="reel-overlay">
+                            <div class="play-badge">▶</div>
+                            <div>
+                                <span class="reel-subtitle">Live Event Activation</span>
+                                <h3 class="reel-title">Sunday Acoustic Open Mic Jam</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="reel-card reveal" onclick="window.open('https://www.instagram.com/ppaperfortune.studio', '_blank')">
+                        <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=800&q=80" alt="Specialty Beverage Reel">
+                        <div class="reel-overlay">
+                            <div class="play-badge">▶</div>
+                            <div>
+                                <span class="reel-subtitle">Menu Launch Campaign</span>
+                                <h3 class="reel-title">Artisan Cold Brew Launch</h3>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1740,16 +1866,16 @@ button, a { -webkit-tap-highlight-color: transparent; }
                     <p class="section-subtitle">Visual highlights from our partner cafés</p>
                 </div>
                 <div class="works-grid" style="grid-template-columns: repeat(4, 1fr); gap: 1rem;">
-                    <div class="work-card reveal" style="aspect-ratio: 1;">
+                    <div class="work-card reveal" style="aspect-ratio: 1;" onclick="window.open('https://www.instagram.com/ppaperfortune.studio', '_blank')">
                         <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=600&q=80" alt="Coffee Aesthetic">
                     </div>
-                    <div class="work-card reveal" style="aspect-ratio: 1;">
+                    <div class="work-card reveal" style="aspect-ratio: 1;" onclick="window.open('https://www.instagram.com/ppaperfortune.studio', '_blank')">
                         <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=600&q=80" alt="Cafe Interior">
                     </div>
-                    <div class="work-card reveal" style="aspect-ratio: 1;">
+                    <div class="work-card reveal" style="aspect-ratio: 1;" onclick="window.open('https://www.instagram.com/ppaperfortune.studio', '_blank')">
                         <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600&q=80" alt="Acoustic Session">
                     </div>
-                    <div class="work-card reveal" style="aspect-ratio: 1;">
+                    <div class="work-card reveal" style="aspect-ratio: 1;" onclick="window.open('https://www.instagram.com/ppaperfortune.studio', '_blank')">
                         <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&q=80" alt="Pour Over">
                     </div>
                 </div>
@@ -1757,11 +1883,11 @@ button, a { -webkit-tap-highlight-color: transparent; }
         </section>
     </div>
 
-    <!-- SHOP / RETAINERS PAGE -->
+    <!-- SHOP / PRICING PAGE -->
     <div class="page" id="page-shop">
         <div class="shop-hero">
             <div class="shop-hero-content">
-                <h1>Monthly Retainers</h1>
+                <h1>Service Packages</h1>
                 <p>Structured packages engineered for café footfall & brand prestige</p>
             </div>
         </div>
@@ -1775,7 +1901,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
                     <div class="product-details">
                         <h3>Tier 1: Starter Vibe</h3>
                         <p class="product-desc">Essential social media presence & Google SEO setup</p>
-                        <span class="product-price">₹14,000 – ₹15,000 / month</span>
+                        <span class="card-contact-btn">Inquire via WhatsApp &rarr;</span>
                     </div>
                 </div>
                 <div class="product-card reveal" onclick="showProduct('growth-reach')">
@@ -1786,7 +1912,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
                     <div class="product-details">
                         <h3>Tier 2: Growth & Reach</h3>
                         <p class="product-desc">12 Reels/mo, Influencer Visit & FREE Digital Menu Web App</p>
-                        <span class="product-price">₹25,000 – ₹28,000 / month</span>
+                        <span class="card-contact-btn">Inquire via WhatsApp &rarr;</span>
                     </div>
                 </div>
                 <div class="product-card reveal" onclick="showProduct('full-experiential')">
@@ -1797,7 +1923,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
                     <div class="product-details">
                         <h3>Tier 3: Full Experiential</h3>
                         <p class="product-desc">20 Reels/mo, Weekly Shoots & Live Event Activations</p>
-                        <span class="product-price">₹39,999 – ₹45,000 / month</span>
+                        <span class="card-contact-btn">Inquire via WhatsApp &rarr;</span>
                     </div>
                 </div>
                 <div class="product-card reveal" onclick="showProduct('digital-menu')">
@@ -1808,7 +1934,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
                     <div class="product-details">
                         <h3>Digital Menu & Table QR Setup</h3>
                         <p class="product-desc">Custom mobile website, location map, & WhatsApp order link</p>
-                        <span class="product-price">₹10,000 (One-Time Setup)</span>
+                        <span class="card-contact-btn">Inquire via WhatsApp &rarr;</span>
                     </div>
                 </div>
             </div>
@@ -1823,7 +1949,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
                     <img id="product-img" src="" alt="">
                 </div>
                 <div class="product-info-panel">
-                    <button class="back-btn" onclick="navigateTo('shop')">← Back to Retainers</button>
+                    <button class="back-btn" onclick="navigateTo('shop')">← Back to Packages</button>
                     <h1 id="product-name">Package Name</h1>
                     <p class="poetic-desc" id="product-poetic">Description</p>
                     
@@ -1840,26 +1966,17 @@ button, a { -webkit-tap-highlight-color: transparent; }
                             <span class="meta-label">Commitment</span>
                             <span class="meta-value" id="product-edition">3-Month Agreement</span>
                         </div>
-                        <div class="meta-item">
-                            <span class="meta-label">Investment</span>
-                            <span class="meta-value" id="product-price">₹0.00</span>
-                        </div>
                     </div>
 
                     <div class="order-section">
-                        <div class="quantity-selector">
-                            <button class="qty-btn" onclick="changeQty(-1)">−</button>
-                            <span class="qty-value" id="qty">1</span>
-                            <button class="qty-btn" onclick="changeQty(1)">+</button>
-                        </div>
                         <button class="whatsapp-btn" onclick="orderViaWhatsApp()">
-                            Inquire via WhatsApp
+                            Inquire & Book Strategy Call
                         </button>
                     </div>
 
                     <div class="care-note">
                         <strong>Founding Client Guarantee</strong>
-                        Every retainer includes dedicated on-site content batching, custom brand alignment, and direct communication with our founding leadership team in Bengaluru.
+                        Every package includes dedicated on-site content batching, custom brand alignment, and direct communication with our founding leadership team in Bengaluru.
                     </div>
                 </div>
             </div>
@@ -1883,6 +2000,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
                     <h3>Manav</h3>
                     <span style="color: var(--accent-blue); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.15em; display: block; margin-bottom: 1rem;">Managing Partner & Digital Operations Lead</span>
                     <p>Oversees agency strategy, overall business operations, custom web platforms, and Google local SEO systems.</p>
+                    <a href="https://wa.me/919840631999?text=Hi%20Manav,%20I'd%20like%20to%20discuss%20our%20cafe%20strategy." target="_blank" class="card-contact-btn">Connect with Manav &rarr;</a>
                 </div>
             </div>
             <div class="about-grid reverse reveal">
@@ -1893,6 +2011,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
                     <h3>Abdul</h3>
                     <span style="color: var(--accent-blue); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.15em; display: block; margin-bottom: 1rem;">Creative Director & Head of Production</span>
                     <p>Directs visual storytelling, food & ambient photography, videography, cinematic reel edits, and production quality control.</p>
+                    <a href="https://wa.me/919840631999?text=Hi%20Abdul,%20I'd%20like%20to%20talk%20about%20a%20shoot." target="_blank" class="card-contact-btn">Connect with Production &rarr;</a>
                 </div>
             </div>
             <div class="about-grid reveal">
@@ -1903,6 +2022,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
                     <h3>Vinay</h3>
                     <span style="color: var(--accent-blue); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.15em; display: block; margin-bottom: 1rem;">Client Partnerships & Success Lead</span>
                     <p>Manages client relations, business development, on-site meetings, proposal presentations, and onboarding.</p>
+                    <a href="https://wa.me/919840631999?text=Hi%20Vinay,%20let's%20discuss%20a%20partnership." target="_blank" class="card-contact-btn">Contact Vinay &rarr;</a>
                 </div>
             </div>
             <div class="about-grid reverse reveal">
@@ -1913,6 +2033,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
                     <h3>Dhanush</h3>
                     <span style="color: var(--accent-blue); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.15em; display: block; margin-bottom: 1rem;">Social Media & Community Strategist</span>
                     <p>Drives Instagram handle management, posting schedules, copywritten captions, trending audio, and audience growth.</p>
+                    <a href="https://wa.me/919840631999?text=Hi%20Dhanush,%20let's%20talk%20social%20strategy." target="_blank" class="card-contact-btn">Talk Social Media &rarr;</a>
                 </div>
             </div>
         </div>
@@ -1930,22 +2051,42 @@ button, a { -webkit-tap-highlight-color: transparent; }
         <div class="container process-detail">
             <div class="process-detail-grid">
                 <div class="process-detail-item reveal">
-                    <h3>1. Content Creation & Production</h3>
-                    <p>Professional café interior, ambiance, food & beverage photography. Cinematic promotional videos, 4K short-form reels, and brand storytelling visuals for seasonal menu launches.</p>
+                    <div>
+                        <h3>1. Content Creation & Production</h3>
+                        <p>Professional café interior, ambiance, food & beverage photography. Cinematic promotional videos, 4K short-form reels, and brand storytelling visuals for seasonal menu launches.</p>
+                    </div>
+                    <div class="service-contact-inline">
+                        <a href="https://wa.me/919840631999?text=Hi%20PPAPERFORTUNE,%20I'd%20like%20to%20inquire%20about%20Content%20Creation%20%26%20Production." target="_blank" class="service-contact-link">Inquire for Shoot &rarr;</a>
+                    </div>
                 </div>
                 <div class="process-detail-item reveal">
-                    <h3>2. Social Media & Community Growth</h3>
-                    <p>End-to-end Instagram handle management, aesthetic grid curation, publishing schedules, copywritten captions, trending audio selection, and active DM engagement.</p>
+                    <div>
+                        <h3>2. Social Media & Community Growth</h3>
+                        <p>End-to-end Instagram handle management, aesthetic grid curation, publishing schedules, copywritten captions, trending audio selection, and active DM engagement.</p>
+                    </div>
+                    <div class="service-contact-inline">
+                        <a href="https://wa.me/919840631999?text=Hi%20PPAPERFORTUNE,%20I'd%20like%20to%20inquire%20about%20Social%20Media%20Management." target="_blank" class="service-contact-link">Inquire for Social Growth &rarr;</a>
+                    </div>
                 </div>
             </div>
             <div class="process-detail-grid">
                 <div class="process-detail-item reveal">
-                    <h3>3. Website & Google Maps SEO</h3>
-                    <p>Custom high-speed café websites, digital mobile menus, table-top QR code menu integration, and Google Business Profile optimization for local search domination.</p>
+                    <div>
+                        <h3>3. Website & Google Maps SEO</h3>
+                        <p>Custom high-speed café websites, digital mobile menus, table-top QR code menu integration, and Google Business Profile optimization for local search domination.</p>
+                    </div>
+                    <div class="service-contact-inline">
+                        <a href="https://wa.me/919840631999?text=Hi%20PPAPERFORTUNE,%20I'd%20like%20to%20inquire%20about%20Website%20%26%20Google%20SEO." target="_blank" class="service-contact-link">Inquire for Web & SEO &rarr;</a>
+                    </div>
                 </div>
                 <div class="process-detail-item reveal">
-                    <h3>4. Creator & Influencer Collaborations</h3>
-                    <p>Strategic matching with local food, lifestyle, and student creators in Bengaluru. Organizing hosted tasting visits, food reviews, and co-branded reel campaigns.</p>
+                    <div>
+                        <h3>4. Creator & Influencer Collaborations</h3>
+                        <p>Strategic matching with local food, lifestyle, and student creators in Bengaluru. Organizing hosted tasting visits, food reviews, and co-branded reel campaigns.</p>
+                    </div>
+                    <div class="service-contact-inline">
+                        <a href="https://wa.me/919840631999?text=Hi%20PPAPERFORTUNE,%20I'd%20like%20to%20inquire%20about%20Creator%20Collaborations." target="_blank" class="service-contact-link">Inquire for Creator Visits &rarr;</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1976,6 +2117,9 @@ button, a { -webkit-tap-highlight-color: transparent; }
                         <h4>Live Coverage</h4>
                         <p>End-to-end event planning, ticketing, promotion, and highlight reel generation.</p>
                     </div>
+                </div>
+                <div style="text-align: center; margin-top: 3.5rem;">
+                    <a href="https://wa.me/919840631999?text=Hi%20PPAPERFORTUNE,%20we'd%20like%20to%20host%20an%20Event%20Activation%20at%20our%20cafe." target="_blank" class="whatsapp-btn" style="display: inline-flex; width: auto; padding: 1.2rem 2.5rem;">Book an Event Activation</a>
                 </div>
             </div>
         </div>
@@ -2040,7 +2184,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
                 <div class="footer-links">
                     <h4>Navigate</h4>
                     <ul>
-                        <li><a href="#" onclick="navigateTo('shop'); return false;">Retainers</a></li>
+                        <li><a href="#" onclick="navigateTo('shop'); return false;">Pricing</a></li>
                         <li><a href="#" onclick="navigateTo('process'); return false;">Services</a></li>
                         <li><a href="#" onclick="navigateTo('about'); return false;">Leadership</a></li>
                         <li><a href="#" onclick="navigateTo('contact'); return false;">Contact</a></li>
@@ -2068,12 +2212,11 @@ button, a { -webkit-tap-highlight-color: transparent; }
     </footer>
 
     <script>
-        // Product / Retainer Data
+        // Product / Package Data
         const products = {
             'starter-vibe': {
                 name: 'Tier 1: Starter Vibe',
                 poetic: 'Essential visual presence & local search footprint engineered for emerging cafés near Presidency University.',
-                price: '₹12,000 – ₹15,000 / mo',
                 material: '8 Reels + 1 Photoshoot Session',
                 dims: '1 On-Site Shoot Session / month',
                 edition: '3-Month Initial Agreement',
@@ -2081,8 +2224,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
             },
             'growth-reach': {
                 name: 'Tier 2: Growth & Reach',
-                poetic: 'Our most popular retainer package. Delivers 3 reels per week, active DM management, local creator visits, and a complimentary Digital Menu Website.',
-                price: '₹20,000 – ₹25,000 / mo',
+                poetic: 'Our most popular package. Delivers 3 reels per week, active DM management, local creator visits, and a complimentary Digital Menu Website.',
                 material: '12 Reels + 2 Shoots + Influencer Visit',
                 dims: '2 On-Site Shoot Sessions / month',
                 edition: 'Includes FREE Menu Website',
@@ -2091,7 +2233,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
             'full-experiential': {
                 name: 'Tier 3: Full Experiential',
                 poetic: 'Complete market domination. Combines 20 reels per month, weekly photo sessions, Google Maps review systems, and monthly live acoustic/open mic activations.',
-                price: '₹35,000 – ₹40,000 / mo',
                 material: '20 Reels + Weekly Shoots + Live Event',
                 dims: 'Weekly Shoot Sessions',
                 edition: 'Full Experiential Partner',
@@ -2100,7 +2241,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
             'digital-menu': {
                 name: 'Digital Menu & Table QR Setup',
                 poetic: 'Custom high-speed mobile website featuring your café menu, location map, and direct WhatsApp / delivery integration via on-table QR codes.',
-                price: '₹10,000 (One-Time)',
                 material: 'Mobile Web App + Table QR Codes',
                 dims: 'Responsive Mobile Layout',
                 edition: 'One-Time Setup Fee',
@@ -2108,7 +2248,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
             }
         };
 
-        let currentQty = 1;
         let currentProduct = null;
 
         // Navigation
@@ -2166,33 +2305,25 @@ button, a { -webkit-tap-highlight-color: transparent; }
             if (!product) return;
             
             currentProduct = product;
-            currentQty = 1;
             
             document.getElementById('product-name').textContent = product.name;
             document.getElementById('product-poetic').textContent = product.poetic;
-            document.getElementById('product-price').textContent = product.price;
             document.getElementById('product-material').textContent = product.material;
             document.getElementById('product-dims').textContent = product.dims;
             document.getElementById('product-edition').textContent = product.edition;
             document.getElementById('product-img').src = product.image;
             document.getElementById('product-img').alt = product.name;
-            document.getElementById('qty').textContent = currentQty;
             
             navigateTo('product');
-        }
-
-        function changeQty(delta) {
-            currentQty = Math.max(1, currentQty + delta);
-            document.getElementById('qty').textContent = currentQty;
         }
 
         function orderViaWhatsApp() {
             if (!currentProduct) return;
             
-            const message = `Hello PPAPERFORTUNE Team,\n\nWe are interested in discussing the following retainer package:\n• Package: ${currentProduct.name}\n• Duration: ${currentQty} month(s)\n• Investment: ${currentProduct.price}\n\nPlease let us know when we can schedule an on-site strategy meeting at our cafe.`;
+            const message = `Hello PPAPERFORTUNE Team,\n\nWe are interested in discussing the following service package:\n• Package: ${currentProduct.name}\n• Deliverables: ${currentProduct.material}\n\nPlease let us know when we can schedule an on-site strategy meeting at our cafe.`;
             
             const encoded = encodeURIComponent(message);
-            window.open(`https://wa.me/?text=${encoded}`, '_blank');
+            window.open(`https://wa.me/919840631999?text=${encoded}`, '_blank');
         }
 
         // Scroll Reveal
